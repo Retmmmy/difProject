@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.Utilities;
 
 public class Player : MonoBehaviour
-{   
+{
     public static Player Instance { get; private set; }
 
     [SerializeField] private float movingSpeed = 30f;
@@ -23,10 +23,10 @@ public class Player : MonoBehaviour
     {
         Instance = this;
         rb = GetComponent<Rigidbody2D>();
-        
+
     }
 
-    
+
 
 
     private void FixedUpdate()
@@ -35,20 +35,25 @@ public class Player : MonoBehaviour
 
     }
 
-    private void HandleMovement() {
+    private void HandleMovement()
+    {
         Vector2 inputVector = GameInput.Instance.GetMovementVector();
 
         inputVector = inputVector.normalized;
 
         rb.MovePosition(rb.position + inputVector * (movingSpeed * Time.fixedDeltaTime));
 
-        if (Mathf.Abs(inputVector.x) > minMovingSpeed || Mathf.Abs(inputVector.y)> minMovingSpeed) {
+        if (Mathf.Abs(inputVector.x) > minMovingSpeed || Mathf.Abs(inputVector.y) > minMovingSpeed)
+        {
             isRunning = true;
-        } else {
+        }
+        else
+        {
             isRunning = false;
         }
     }
-    public bool IsRunning() {
+    public bool IsRunning()
+    {
         return isRunning;
     }
     public Vector3 GetPlayerScreenPosition()
